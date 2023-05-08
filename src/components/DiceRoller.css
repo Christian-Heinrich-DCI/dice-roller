@@ -4,3 +4,10 @@
     align-items: center;
     gap: 1rem;
 }
+header section {
+    margin-top: 0.5rem;
+}
+main {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}

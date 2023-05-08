@@ -29,15 +29,13 @@ export default function DiceRoller() {
 
     return (
         <>
-            <h2>Dice Roller</h2>
-            {/* {Object.keys(emptyPool).map((key) => console.log(key))} */}
-            <Dx size={"D4"} />
-            <Dx size={"D6"} />
-            <Dx size={"D8"} />
-            <Dx size={"D10"} />
-            <Dx size={"D20"} />
-            <Dx size={"D100"} />
-            <div>
+            <h1>Dice Roller</h1>
+            <header>
+                {Object.keys(dicePool).map((size, index) => (
+                    <Dx key={index} size={size} />
+                ))}
+            </header>
+            <main>
                 <button
                     onClick={() => {
                         reset();
@@ -47,8 +45,8 @@ export default function DiceRoller() {
                     RESET
                 </button>
                 <button onClick={rollDice}>ROLL</button>
-            </div>
-            <div>{JSON.stringify(rollResult)}</div>
+            </main>
+            <footer>{JSON.stringify(rollResult)}</footer>
         </>
     );
 }

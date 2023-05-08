@@ -5,7 +5,7 @@ export default function Dx({ size }) {
     const { dicePool, setDicePool } = useContext(DiceContext);
 
     return (
-        <div className="dice__single__container">
+        <section className="dice__single__container">
             <button
                 onClick={() => {
                     // 0 is minimum, don't decrease after that
@@ -32,6 +32,6 @@ export default function Dx({ size }) {
             >
                 +
             </button>
-        </div>
+        </section>
     );
 }
