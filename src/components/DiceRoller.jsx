@@ -1,18 +1,19 @@
 import { useContext, useState } from "react";
+import { DiceContext } from "../context/DiceContainer";
 import Dx from "./Dx";
 import "./DiceRoller.css";
-import { DiceContext } from "../context/DiceContainer";
 
 function rnd(max) {
-    return Math.floor(Math.random() * max + 1); // The maximum is inclusive and the minimum is inclusive
+    // The maximum is inclusive and the minimum is inclusive
+    return Math.floor(Math.random() * max + 1);
 }
 
 export default function DiceRoller() {
     const { dicePool, reset } = useContext(DiceContext);
     const [rollResult, setRollResult] = useState({});
 
-    const rollDice = () => {
-        const rollObj = {};
+    const handleRoll = () => {
+        const rollObj = {}; // temporary object for next state
         Object.keys(dicePool).forEach((dieSize) => {
             if (dicePool[dieSize] > 0) {
                 const max = parseInt(dieSize.replace("D", ""));
@@ -27,24 +28,23 @@ export default function DiceRoller() {
         setRollResult(rollObj);
     };
 
+    const handleReset = () => {
+        reset(); // resets Context state dicePool
+        setRollResult({}); // resets rolled numbers
+    };
+
     return (
         <>
             <h1>Dice Roller</h1>
             <header>
+                {/* Generating UI for different die sizes */}
                 {Object.keys(dicePool).map((size, index) => (
                     <Dx key={index} size={size} />
                 ))}
             </header>
             <main>
-                <button
-                    onClick={() => {
-                        reset();
-                        setRollResult({});
-                    }}
-                >
-                    RESET
-                </button>
-                <button onClick={rollDice}>ROLL</button>
+                <button onClick={handleReset}>RESET</button>
+                <button onClick={handleRoll}>ROLL</button>
             </main>
             <footer>{JSON.stringify(rollResult)}</footer>
         </>
